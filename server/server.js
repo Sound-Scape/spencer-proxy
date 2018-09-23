@@ -11,9 +11,9 @@ app.use(morgan('dev'));
 app.use('/songs/:songid',express.static(path.join(__dirname, '../public')));
 app.use(`/api`, routes);
 
-app.get('/comments/:songid', (req, res) => {
+app.get('/api/comments/:songid', (req, res) => {
   // console.log(`http:/localhost:3001/api/${req.params.songid}`);
-  axios.get(`http://localhost:3001/api/${req.params.songid}`)
+  axios.get(`http://comments-server.2u82f9p8mx.us-east-2.elasticbeanstalk.com/api/comments/${req.params.songid}`)
     .then(function (response) {
       res.send(response.data);
     })
@@ -23,7 +23,7 @@ app.get('/comments/:songid', (req, res) => {
 });
 
 app.get('/api/stats/:id', (req, res) =>{
-  axios.get(`http://localhost:3004/api/stats/${req.params.id}`)
+  axios.get(`http://server-env-1.phjpybupp3.us-west-1.elasticbeanstalk.com/api/stats/${req.params.id}`)
   .then(({ data }) => {
     res.json(data);
   })
@@ -35,7 +35,7 @@ app.get('/api/stats/:id', (req, res) =>{
 app.get('/relatedTracks/:id', (req, res) => {
   // res.send(req.params.id)
   const songId = req.params.id;
-  axios.get(`http://localhost:3002/relatedTracks/${songId}`)
+  axios.get(`http://18.219.127.175/relatedTracks/${songId}`)
     .then(({ data }) => {
       console.log('Related Tracks', data);
       res.json(data);
@@ -47,7 +47,7 @@ app.get('/relatedTracks/:id', (req, res) => {
  
  app.get('/relatedAlbums/:id', (req, res) => {
   const songId = req.params.id;
-  axios.get(`http://localhost:3002/relatedAlbums/${songId}`)
+  axios.get(`http://18.219.127.175/relatedAlbums/${songId}`)
     .then(({ data }) => {
       console.log('Related Albums', data);
       res.json(data);
