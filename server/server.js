@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const axios = require('axios');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const routes = require('./routes.js')
 
 
@@ -57,6 +57,6 @@ app.get('/relatedTracks/:id', (req, res) => {
     });
  });
 
-app.listen(port, () => {
+app.listen(3000, () => {
   console.log(`server running at: http://localhost:${port}`);
 });
